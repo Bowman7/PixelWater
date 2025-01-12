@@ -1,0 +1,13 @@
+#pragma once
+
+
+class grid{
+public:
+  grid(){
+    grid_col
+  }
+private:
+  int grid_col;
+  int grid_row;
+  int grid_size;
+}
