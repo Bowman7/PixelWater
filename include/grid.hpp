@@ -19,8 +19,12 @@ public:
   void FillRandomDroplets();
 
   void OpUpdateCells();
+  void EvOpUpdateCells();
   void InitActiveCells();
   std::vector<std::pair<int,int>>activeCells;
+  //update
+  void Update();
+  void HandleInputs();
   
 private:
   int grid_cols;

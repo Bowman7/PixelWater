@@ -11,7 +11,7 @@ int main(){
   //init stuff
   InitWindow(SCREEN_WIDTH,SCREEN_HEIGHT,"wheel disp");
 
-  SetTargetFPS(30);
+  SetTargetFPS(120);
 
   //init grid
   grid g(SCREEN_WIDTH,SCREEN_HEIGHT);
@@ -19,9 +19,9 @@ int main(){
   
   while(!WindowShouldClose()){
     //handle inputs
-
+    g.HandleInputs();
     //update
-    g.OpUpdateCells();
+    g.Update();
     //draw
     
     BeginDrawing();
