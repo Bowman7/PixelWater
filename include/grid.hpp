@@ -6,6 +6,9 @@
 #include<vector>
 #include<random>
 
+#include<fstream>
+#include<iostream>
+
 class grid{
 public:
   grid(int height,int width);
@@ -27,6 +30,10 @@ public:
   void HandleInputs();
   
 private:
+  //file handling
+  std::ofstream file;
+
+  
   int grid_cols;
   int grid_rows;
   int grid_size;
@@ -35,4 +42,7 @@ private:
 
   std::vector<int> demo;
   std::vector<std::vector<int>> cell;
+  //dummy cell
+  std::vector<std::vector<int>> loadDummy;
+
 };

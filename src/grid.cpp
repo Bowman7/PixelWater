@@ -7,22 +7,22 @@ void grid::HandleInputs(){
     m_x = GetMouseX();
     m_y = GetMouseY();
 
-    printf("mouse pos X: %d Y: %d\n",m_x,m_y);
+    //printf("mouse pos X: %d Y: %d\n",m_x,m_y);
     int t_col = m_x%grid_size;
     int t_row = m_y%grid_size;
 
-    printf("col x: %d row y: %d\n",t_col,t_row);
+    //printf("col x: %d row y: %d\n",t_col,t_row);
     
     int col = (m_x - t_col)/5;
     int row = (m_y - t_row)/5;
 
-    printf("pos x: %d y: %d\n",col,row);
+    //printf("pos x: %d y: %d\n",col,row);
 
     std::pair<int,int> temp;
     temp.first = row;
     temp.second = col;
 
-    activeCells.emplace_back(temp);
+    //activeCells.emplace_back(temp);
   }else if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)){
     m_x = GetMouseX();
     m_y = GetMouseY();
@@ -33,8 +33,83 @@ void grid::HandleInputs(){
     int col = (m_x - t_col)/5;
     int row = (m_y - t_row)/5;
 
-    cell[row][col] = 2;//2 for wall
+    if(cell[row][col] != 2){//2 for wall
+      cell[row][col] = 2;
+    }else if(cell[row][col] == 2){
+      cell[row][col] = 0;
+    }
+  }else if(IsKeyPressed(KEY_S)){//save current screen
+    printf("Saved current cell\n");
+    file.open("saveBg.txt");
+
+    if(!file.is_open()){
+      printf("Error loading file\n");
+    }
+    //add to line
+    for(int row=0;row<grid_rows;row++){
+      for(int col =0;col<grid_cols;col++){
+	file<<cell[row][col];
+      }
+    }
+
+    file.close();
+  }else if(IsKeyPressed(KEY_C)){//clear current screen
+    activeCells.clear();
+    for(int row=0;row<grid_rows;row++){
+      for(int col =0;col<grid_cols;col++){
+	cell[row][col] = 0;
+      }
+    }
+  }else if(IsKeyPressed(KEY_L)){//load previously saved screen
+    printf("print Load file\n");
     
+    std::ifstream file("saveBg.txt");
+    std::vector<char> temp_cell;
+    if(!file.is_open()){
+      printf("Could not open file");
+    }
+    char ch;
+
+    while(file.get(ch)){
+      temp_cell.push_back(ch);
+    }
+
+    //print temp
+    /* for(char & c : temp_cell){ */
+    /*   printf(" %c ",c); */
+    /* } */
+    
+    //push into dummy cell
+    loadDummy = std::vector<std::vector<int>>(grid_rows,std::vector<int>(grid_cols,0));
+    int row = 0;
+    int col = 0;
+    for(char & c: temp_cell){
+      if(col == 200){
+	col = 0;
+	row++;
+      }
+      int num = c-'0';
+      loadDummy[row][col] = num;
+
+      col++;
+    }
+    //copy to cell
+    cell = loadDummy;
+    //init the active cells
+    activeCells.clear();
+    std::pair<int,int> temp;
+    for(int row=0;row<grid_rows;row++){
+      for(int col = 0;col<grid_cols;col++){
+	if(cell[row][col] == 1){
+	  temp.first = row;
+	  temp.second = col;
+
+	  activeCells.emplace_back(temp);
+	  
+	}
+      }
+    }
+    file.close();
   }
 }
 //update
@@ -123,6 +198,7 @@ int grid::GetRandom(){
   }
   return 0;
 }
+//constructor
 grid::grid(int height,int width){
     grid_cols=200;
     grid_rows = 200;
@@ -134,7 +210,7 @@ grid::grid(int height,int width){
     //init cells
     cell = std::vector<std::vector<int>>(grid_rows,std::vector<int>(grid_cols,0));
     //inti random droplets 500
-    FillRandomDroplets();
+    //FillRandomDroplets();
    
     
 }
