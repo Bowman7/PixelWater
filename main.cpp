@@ -11,7 +11,7 @@ int main(){
   //init stuff
   InitWindow(SCREEN_WIDTH,SCREEN_HEIGHT,"wheel disp");
 
-  SetTargetFPS(120);
+  SetTargetFPS(60);
 
   //init grid
   grid g(SCREEN_WIDTH,SCREEN_HEIGHT);
@@ -25,7 +25,7 @@ int main(){
     //draw
     
     BeginDrawing();
-    ClearBackground(WHITE);
+    ClearBackground(BLACK);
 
     g.DrawGrid();
   

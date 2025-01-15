@@ -7,13 +7,16 @@ void grid::HandleInputs(){
     m_x = GetMouseX();
     m_y = GetMouseY();
 
+    printf("mouse pos X: %d Y: %d\n",m_x,m_y);
     int t_col = m_x%grid_size;
     int t_row = m_y%grid_size;
 
-    int col = (m_x - t_col)/10;
-    int row = (m_y - t_row)/10;
+    printf("col x: %d row y: %d\n",t_col,t_row);
+    
+    int col = (m_x - t_col)/5;
+    int row = (m_y - t_row)/5;
 
-    //printf("pos x: %d y: %d\n",pos_x,pos_y);
+    printf("pos x: %d y: %d\n",col,row);
 
     std::pair<int,int> temp;
     temp.first = row;
@@ -27,8 +30,8 @@ void grid::HandleInputs(){
     int t_col = m_x%grid_size;
     int t_row = m_y%grid_size;
 
-    int col = (m_x - t_col)/10;
-    int row = (m_y - t_row)/10;
+    int col = (m_x - t_col)/5;
+    int row = (m_y - t_row)/5;
 
     cell[row][col] = 2;//2 for wall
     
@@ -121,9 +124,9 @@ int grid::GetRandom(){
   return 0;
 }
 grid::grid(int height,int width){
-    grid_cols=100;
-    grid_rows = 100;
-    grid_size = 10;
+    grid_cols=200;
+    grid_rows = 200;
+    grid_size = 5;
     grid_height = height;
     grid_width = width;
     //printf("yeya aKASDFKJBASDKFBKJDSF");
@@ -160,10 +163,10 @@ void grid::FillRandomDroplets(){
 void grid::DrawGrid(){
 
   for(int i=0;i<grid_cols;i++){
-    //cols
-    //DrawLine(i*grid_size,0,i*grid_size,grid_height,BLACK);
-    //rows
-    //DrawLine(0,i*grid_size,grid_width,i*grid_size,BLUE);
+    /* //cols */
+    /* DrawLine(i*grid_size,0,i*grid_size,grid_height,BLACK); */
+    /* //rows */
+    /* DrawLine(0,i*grid_size,grid_width,i*grid_size,BLUE); */
   }
   DrawCells();
 }
@@ -176,13 +179,13 @@ void grid::DrawCells(){
   for(int r=0;r<grid_rows;r++){
     for(int c=0;c<grid_cols;c++){
       if(cell[r][c] == 1){
-	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,DARKBLUE);
+	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,SKYBLUE);
 	/* int x = (c*grid_size)+(grid_size/2); */
 	/* int y = (r*grid_size)+(grid_size/2); */
 	
 	/* DrawCircle(x,y,radius,DARKBLUE); */
       }else if(cell[r][c] == 2){
-	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,BLACK);
+	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,LIGHTGRAY);
       }
     }
   }
