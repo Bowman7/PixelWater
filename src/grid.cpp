@@ -16,13 +16,16 @@ void grid::HandleInputs(){
     int col = (m_x - t_col)/5;
     int row = (m_y - t_row)/5;
 
+    /* if(cell[row][col] == 2){ */
+    /*   cell[row][col] = 0; */
+    /* } */
     //printf("pos x: %d y: %d\n",col,row);
 
     std::pair<int,int> temp;
     temp.first = row;
     temp.second = col;
 
-    //activeCells.emplace_back(temp);
+    activeCells.emplace_back(temp);
   }else if(IsMouseButtonDown(MOUSE_BUTTON_RIGHT)){
     m_x = GetMouseX();
     m_y = GetMouseY();
@@ -36,23 +39,23 @@ void grid::HandleInputs(){
     if(cell[row][col] != 2){//2 for wall
       cell[row][col] = 2;
     }else if(cell[row][col] == 2){
-      cell[row][col] = 0;
+      //cell[row][col] = 0;
     }
   }else if(IsKeyPressed(KEY_S)){//save current screen
-    printf("Saved current cell\n");
-    file.open("saveBg.txt");
+    /* printf("Saved current cell\n"); */
+    /* file.open("saved/potter.txt"); */
 
-    if(!file.is_open()){
-      printf("Error loading file\n");
-    }
-    //add to line
-    for(int row=0;row<grid_rows;row++){
-      for(int col =0;col<grid_cols;col++){
-	file<<cell[row][col];
-      }
-    }
+    /* if(!file.is_open()){ */
+    /*   printf("Error loading file\n"); */
+    /* } */
+    /* //add to line */
+    /* for(int row=0;row<grid_rows;row++){ */
+    /*   for(int col =0;col<grid_cols;col++){ */
+    /* 	file<<cell[row][col]; */
+    /*   } */
+    /* } */
 
-    file.close();
+    /* file.close(); */
   }else if(IsKeyPressed(KEY_C)){//clear current screen
     activeCells.clear();
     for(int row=0;row<grid_rows;row++){
@@ -63,7 +66,7 @@ void grid::HandleInputs(){
   }else if(IsKeyPressed(KEY_L)){//load previously saved screen
     printf("print Load file\n");
     
-    std::ifstream file("saveBg.txt");
+    std::ifstream file("saved/potter.txt");
     std::vector<char> temp_cell;
     if(!file.is_open()){
       printf("Could not open file");
