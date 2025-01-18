@@ -11,7 +11,7 @@ int main(){
   //init stuff
   InitWindow(SCREEN_WIDTH,SCREEN_HEIGHT,"wheel disp");
 
-  SetTargetFPS(60);
+  SetTargetFPS(120);
 
   //init grid
   grid g(SCREEN_WIDTH,SCREEN_HEIGHT);

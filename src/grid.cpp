@@ -258,13 +258,13 @@ void grid::DrawCells(){
   for(int r=0;r<grid_rows;r++){
     for(int c=0;c<grid_cols;c++){
       if(cell[r][c] == 1){
-	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,SKYBLUE);
-	/* int x = (c*grid_size)+(grid_size/2); */
-	/* int y = (r*grid_size)+(grid_size/2); */
+	//DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,SKYBLUE);
+	int x = (c*grid_size)+(grid_size/2);
+	int y = (r*grid_size)+(grid_size/2);
 	
-	/* DrawCircle(x,y,radius,DARKBLUE); */
+	DrawCircle(x,y,radius,DARKBLUE);
       }else if(cell[r][c] == 2){
-	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,LIGHTGRAY);
+	DrawRectangle(c*grid_size,r*grid_size,grid_size,grid_size,BROWN);
       }
     }
   }
